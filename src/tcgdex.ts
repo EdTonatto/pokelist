@@ -1,0 +1,7 @@
+import type {ApiCard,ApiSet} from './types';
+const ROOT='https://api.tcgdex.net/v2';
+async function request<T>(url:string,signal?:AbortSignal):Promise<T>{const res=await fetch(url,{signal});if(!res.ok)throw new Error(res.status===404?'Nenhuma carta encontrada.':'Não foi possível acessar a TCGdex agora.');return res.json() as Promise<T>}
+export async function searchCards(query:string,signal?:AbortSignal):Promise<ApiCard[]>{const q=encodeURIComponent(query.trim());const langs=['pt-br','en'];for(const lang of langs){try{const cards=await request<ApiCard[]>(`${ROOT}/${lang}/cards?name=${q}`,signal);if(cards.length)return cards.slice(0,60)}catch(e){if(signal?.aborted)throw e; if(lang==='en')throw e}}return []}
+export async function getSets():Promise<ApiSet[]>{try{return await request<ApiSet[]>(`${ROOT}/pt-br/sets`)}catch{return request<ApiSet[]>(`${ROOT}/en/sets`)}}
+export async function getSet(id:string,language='pt-br'):Promise<ApiCard[]>{try{const set=await request<{cards:ApiCard[]}>(`${ROOT}/${language}/sets/${encodeURIComponent(id)}`);return (set.cards||[]).map(c=>({...c,set:{...c.set,id:c.set?.id||id,name:c.set?.name||''}}))}catch{const set=await request<{cards:ApiCard[]}>(`${ROOT}/en/sets/${encodeURIComponent(id)}`);return (set.cards||[]).map(c=>({...c,set:{...c.set,id:c.set?.id||id,name:c.set?.name||''}}))}}
+export function imageUrl(image?:string){if(!image)return null;return image.endsWith('/high')||image.endsWith('/low')?image:`${image}/low`}
