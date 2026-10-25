@@ -33,4 +33,4 @@ export async function getSets():Promise<ApiSet[]>{
   try{return await pending}catch(error){if(setsCache===pending)setsCache=null;throw error}
 }
 export async function getSet(id:string,language='pt-br'):Promise<ApiCard[]>{try{const set=await request<{cards:ApiCard[]}>(`${ROOT}/${language}/sets/${encodeURIComponent(id)}`);return (set.cards||[]).map(c=>({...c,set:{...c.set,id:c.set?.id||id,name:c.set?.name||''}}))}catch{const set=await request<{cards:ApiCard[]}>(`${ROOT}/en/sets/${encodeURIComponent(id)}`);return (set.cards||[]).map(c=>({...c,set:{...c.set,id:c.set?.id||id,name:c.set?.name||''}}))}}
-export function imageUrl(image?:string){if(!image)return null;return image.endsWith('/high')||image.endsWith('/low')?image:`${image}/low`}
+export function imageUrl(image?:string){if(!image)return null;const base=image.replace(/\/(?:high|low)(?:\.png)?$/,'');return `${base}/high.png`}
