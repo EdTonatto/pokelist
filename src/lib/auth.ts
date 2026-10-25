@@ -22,7 +22,9 @@ export function usePokeListAuth() {
     setUser(session.user);
   }, []);
   const register = useCallback(async (values: Registration) => {
-    await apiRequest("/auth/register", { method: "POST", body: JSON.stringify(values) });
+    const session = await apiRequest<{ accessToken: string; user: Account }>("/auth/register", { method: "POST", body: JSON.stringify(values) });
+    setAccessToken(session.accessToken);
+    setUser(session.user);
   }, []);
   const logout = useCallback(async () => {
     try { await apiRequest("/auth/logout", { method: "POST" }); }

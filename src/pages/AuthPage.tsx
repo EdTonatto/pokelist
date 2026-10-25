@@ -5,7 +5,7 @@ import { apiRequest, ApiError } from "../lib/api";
 type Mode = "login" | "register" | "verify-email" | "forgot-password" | "reset-password";
 const messages: Record<string,string> = {
   INVALID_CREDENTIALS: "E-mail ou senha incorretos.",
-  EMAIL_NOT_VERIFIED: "Confirme seu e-mail antes de entrar.",
+
   EMAIL_ALREADY_REGISTERED: "Já existe uma conta com este e-mail.",
   REQUEST_FAILED: "Não foi possível concluir a operação.",
 };
@@ -29,7 +29,7 @@ export function AuthPage({ auth }: { auth: AuthController }) {
       } else if (mode === "register") {
         if (password !== confirm) throw new Error("As senhas não coincidem.");
         await auth.register({displayName,email,password});
-        setNotice("Conta criada! Confira sua caixa de entrada e confirme o e-mail.");
+        nav("/dashboard", {replace:true});
       } else if (mode === "verify-email") {
         if (!token) throw new Error("Link de confirmação inválido.");
         await apiRequest("/auth/verify-email",{method:"POST",body:JSON.stringify({token})});
