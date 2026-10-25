@@ -90,3 +90,22 @@
 .card-quantity-line b{min-width:15px;text-align:center;font-size:9px;color:#474953}
 
 .mark-card-acquired{display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1px solid #d8eadc;border-radius:6px;background:#f2f8f3;color:#568a69;padding:5px 7px;font-size:8px;font-weight:700;cursor:pointer;white-space:nowrap}.mark-card-acquired:hover{background:#eaf5ed}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid #e5e2ed;border-radius:7px;background:#fff;color:#565961;padding:7px 9px;font-size:10px;font-weight:600;cursor:pointer}.theme-toggle:hover{background:#f7f5fb;color:#6652bb}
+html[data-theme="dark"]{color-scheme:dark;background:#17181d;color:#e8e8ee;--ink:#e8e8ee;--muted:#a5a6b1;--line:#343640;--paper:#22242b;--surface:#17181d}
+html[data-theme="dark"] body,html[data-theme="dark"] .app,html[data-theme="dark"] .main{background:#17181d;color:#e8e8ee}
+html[data-theme="dark"] .sidebar,html[data-theme="dark"] .topbar,html[data-theme="dark"] .stat-card,html[data-theme="dark"] .progress-card,html[data-theme="dark"] .list-card,html[data-theme="dark"] .card-tile,html[data-theme="dark"] .add-panel,html[data-theme="dark"] .backup-card,html[data-theme="dark"] .modal,html[data-theme="dark"] .toolbar,html[data-theme="dark"] .search-box,html[data-theme="dark"] .detail-progress,html[data-theme="dark"] .filter-row,html[data-theme="dark"] .search-result,html[data-theme="dark"] .selection-bar,html[data-theme="dark"] .search-panel,html[data-theme="dark"] .import-preview,html[data-theme="dark"] .backup-foot,html[data-theme="dark"] .empty,html[data-theme="dark"] .type-options button{background:#22242b;border-color:#343640}
+html[data-theme="dark"] .sidebar,html[data-theme="dark"] .topbar{background:#1e2026}
+html[data-theme="dark"] .welcome{background:#29243a}
+html[data-theme="dark"] .welcome h1,html[data-theme="dark"] .page-title-row h1,html[data-theme="dark"] .detail-head h1,html[data-theme="dark"] .section-heading h2,html[data-theme="dark"] .list-info h3,html[data-theme="dark"] .tile-body h3,html[data-theme="dark"] .backup-card h2,html[data-theme="dark"] .modal h2,html[data-theme="dark"] .empty h3,html[data-theme="dark"] .privacy-banner h2{color:#f0eff5}
+html[data-theme="dark"] .welcome p,html[data-theme="dark"] .page-title-row p,html[data-theme="dark"] .detail-head p,html[data-theme="dark"] .section-heading p,html[data-theme="dark"] .list-info>p,html[data-theme="dark"] .tile-body>p,html[data-theme="dark"] .stat-foot,html[data-theme="dark"] .stat-label,html[data-theme="dark"] .progress-numbers span,html[data-theme="dark"] .progress-foot,html[data-theme="dark"] .crumb,html[data-theme="dark"] .local-badge,html[data-theme="dark"] .side-label,html[data-theme="dark"] .backup-note p,html[data-theme="dark"] .backup-card>p,html[data-theme="dark"] .backup-foot p,html[data-theme="dark"] .empty p,html[data-theme="dark"] .card-quantity-line>span{color:#a5a6b1}
+html[data-theme="dark"] .backup-note,html[data-theme="dark"] .tip,html[data-theme="dark"] .privacy-banner{background:#292b33;border-color:#3a3c46}
+html[data-theme="dark"] .button.secondary,html[data-theme="dark"] .theme-toggle,html[data-theme="dark"] .float-tag,html[data-theme="dark"] .nav-count,html[data-theme="dark"] .card-quantity button,html[data-theme="dark"] .card-quantity-line button,html[data-theme="dark"] .large-search,html[data-theme="dark"] .select-wrap select,html[data-theme="dark"] input,html[data-theme="dark"] textarea,html[data-theme="dark"] select{background:#292b33;border-color:#41434e;color:#e8e8ee}
+html[data-theme="dark"] .theme-toggle:hover,html[data-theme="dark"] .button.secondary:hover{background:#343640}
+html[data-theme="dark"] .search-result:hover,html[data-theme="dark"] .sidebar nav a:hover{background:#2d2a39}
+html[data-theme="dark"] .sidebar nav a.active,html[data-theme="dark"] .search-result.selected{background:#332d47;color:#d9d0ff}
+html[data-theme="dark"] .results-heading{background:#1c1e24;border-color:#343640;color:#b9bac4}
+html[data-theme="dark"] .card-quantity-editors{border-color:#393b45}
+html[data-theme="dark"] .card-quantity-line b,html[data-theme="dark"] .tile-number,html[data-theme="dark"] .crumb span{color:#d5d5dd}
+html[data-theme="dark"] .text-link,html[data-theme="dark"] .icon-button{color:#b8a9ff}
+html[data-theme="dark"] .theme-toggle{flex:none}
+@media(max-width:760px){.theme-toggle{padding:7px}.theme-toggle span{display:none}}
