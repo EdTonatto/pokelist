@@ -120,3 +120,7 @@ html[data-theme="dark"] .trade-price-control,html[data-theme="dark"] .trade-sear
 html[data-theme="dark"] .trade-price-control input,html[data-theme="dark"] .trade-search-price input{background:#292b33;border-color:#41434e;color:#e8e8ee}
 html[data-theme="dark"] .trade-status{color:#a4d1af;background:#293b31}
 html[data-theme="dark"] .trade-summary{color:#a4d1af}
+html[data-theme="dark"] .status-pill.wanted{color:#d1c6ff;background:#39314f}
+html[data-theme="dark"] .status-pill.acquired{color:#a4d1af;background:#293b31}
+html[data-theme="dark"] .mark-card-acquired{color:#a4d1af;background:#293b31;border-color:#3b6548}
+html[data-theme="dark"] .mark-card-acquired:hover{color:#c5e8cc;background:#34513b}
