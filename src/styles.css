@@ -23,3 +23,17 @@
 .set-add-bar{position:sticky;bottom:0;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:#fff;border-top:1px solid #e9e7ee;box-shadow:0 -5px 15px #29233b0a}
 .set-add-bar>span{font-size:10px;color:#777985}
 @media(max-width:520px){.set-add-bar{padding:10px;gap:8px}.set-add-bar>span{font-size:9px}.set-add-bar .button{font-size:9px;padding:8px}}
+.list-modal{max-height:92vh;overflow:auto}
+.cover-editor{display:grid;grid-template-columns:minmax(110px, .9fr) 1.1fr;gap:12px;align-items:stretch;margin-top:8px}
+.cover-preview{min-height:92px;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#665a7c;background-position:center;background-size:cover;position:relative;overflow:hidden}
+.cover-preview:has(span){text-shadow:0 1px 3px #fff,0 0 8px #fff}
+.cover-preview span{font-size:10px;font-weight:700;text-align:center;padding:0 8px}
+.cover-options{display:grid;align-content:center;justify-items:start;gap:8px}
+.cover-swatches{display:flex;flex-wrap:wrap;gap:7px}
+.cover-swatch,.custom-color{width:24px;height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #dedbe5;cursor:pointer;position:relative;overflow:hidden}
+.cover-swatch.active{box-shadow:0 0 0 2px #7965c9}
+.custom-color input{position:absolute;inset:-5px;width:34px;height:34px;padding:0;border:0;cursor:pointer}
+.cover-upload{position:relative;overflow:hidden}
+.cover-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.cover-error{color:#a3544f;font-size:9px;margin:6px 0}
+@media(max-width:450px){.cover-editor{grid-template-columns:1fr}.cover-preview{min-height:80px}}
