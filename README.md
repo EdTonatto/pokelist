@@ -11,7 +11,7 @@ Aplicação web para organizar coleções e listas de troca e venda de cartas Po
 - Em listas de coleção, definir quantas cópias deseja e acompanhar quantas já conseguiu.
 - Em listas de troca e venda, registrar quantas cópias estão disponíveis e o preço opcional de cada carta.
 - Personalizar a capa da lista com uma cor, uma foto ou a imagem de uma carta.
-- Ampliar as imagens das cartas e alternar entre os temas claro e escuro.
+- Ampliar as imagens das cartas, alternar entre os temas claro e escuro e escolher paletas inspiradas em Pokémon na página **Aparência**.
 - Compartilhar listas pelo WhatsApp ou exportar cartas como JPG e PDF em uma grade de até 3 × 3 por página.
 - Enviar sugestões ou relatar problemas pelo formulário do site. O GitHub abre uma issue preenchida para revisão e confirmação.
 - Exportar e importar um backup JSON.
