@@ -17,6 +17,7 @@ export function ListsPage({
 }) {
   const [modal, setModal] = useState(false),
     [query, setQuery] = useState(""),
+    [saveError, setSaveError] = useState(""),
     route = useLocation(),
     nav = useNavigate();
   useEffect(() => {
@@ -78,12 +79,18 @@ export function ListsPage({
       ) : (
         <EmptyLists />
       )}
+      {saveError && <p className="error-box" role="alert">{saveError}</p>}
       {modal && (
         <ListModal
           onClose={() => setModal(false)}
           onCreate={async (l) => {
-            await onSave([...lists, l]);
-            setModal(false);
+            try {
+              setSaveError("");
+              await onSave([...lists, l]);
+              setModal(false);
+            } catch {
+              setSaveError("Não foi possível salvar a lista no servidor. Confira a conexão e tente novamente.");
+            }
           }}
         />
       )}
