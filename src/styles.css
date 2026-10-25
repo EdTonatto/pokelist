@@ -37,3 +37,8 @@
 .cover-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
 .cover-error{color:#a3544f;font-size:9px;margin:6px 0}
 @media(max-width:450px){.cover-editor{grid-template-columns:1fr}.cover-preview{min-height:80px}}
+/* Search results: reveal the expand icon centered over the card image on hover. */
+.search-result-row>.image-expand-button{left:31px;top:50%;transform:translate(-50%,-50%);opacity:0;visibility:hidden;transition:opacity .14s ease,visibility .14s ease}
+.search-result-row:hover>.image-expand-button,.search-result-row>.image-expand-button:focus-visible{opacity:1;visibility:visible}
+.search-result-row>.image-expand-button:hover{transform:translate(-50%,-50%);}
+@media(hover:none){.search-result-row>.image-expand-button{opacity:1;visibility:visible}}
