@@ -1,3 +1,4 @@
+import { Eye, EyeOff } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import type { AuthController } from "../lib/auth";
@@ -15,6 +16,7 @@ export function AuthPage({ auth }: { auth: AuthController }) {
   const token = new URLSearchParams(route.search).get("token") || "";
   const [email,setEmail] = useState(""), [displayName,setName] = useState("");
   const [password,setPassword] = useState(""), [confirm,setConfirm] = useState("");
+  const [showPassword,setShowPassword] = useState(false), [showConfirm,setShowConfirm] = useState(false);
   const [busy,setBusy] = useState(false), [notice,setNotice] = useState(""), [error,setError] = useState("");
   const titles: Record<Mode,string> = {
     login:"Entrar no PokeList", register:"Criar conta", "verify-email":"Confirmar e-mail",
@@ -27,6 +29,7 @@ export function AuthPage({ auth }: { auth: AuthController }) {
         await auth.login({email,password});
         nav("/dashboard", {replace:true});
       } else if (mode === "register") {
+        if (password.length < 8) throw new Error("A senha deve ter no mínimo 8 caracteres.");
         if (password !== confirm) throw new Error("As senhas não coincidem.");
         await auth.register({displayName,email,password});
         nav("/dashboard", {replace:true});
@@ -58,8 +61,16 @@ export function AuthPage({ auth }: { auth: AuthController }) {
       <form onSubmit={(event)=>void submit(event)} className="auth-form">
         {mode==="register" && <label>Nome de exibição<input required maxLength={100} value={displayName} onChange={e=>setName(e.target.value)}/></label>}
         {needsEmail && <label>E-mail<input type="email" autoComplete="email" required value={email} onChange={e=>setEmail(e.target.value)}/></label>}
-        {needsPassword && <label>Senha<input type="password" autoComplete={mode==="login"?"current-password":"new-password"} required minLength={mode==="login"?1:12} value={password} onChange={e=>setPassword(e.target.value)}/></label>}
-        {(mode==="register" || mode==="reset-password") && <label>Confirmar senha<input type="password" autoComplete="new-password" required minLength={12} value={confirm} onChange={e=>setConfirm(e.target.value)}/></label>}
+        {needsPassword && <label>Senha
+          <span className="password-field"><input type={showPassword?"text":"password"} autoComplete={mode==="login"?"current-password":"new-password"} required minLength={mode==="login"?1:8} maxLength={128} value={password} onChange={e=>setPassword(e.target.value)}/>
+            <button type="button" className="password-visibility" onClick={()=>setShowPassword(v=>!v)} aria-label={showPassword?"Ocultar senha":"Mostrar senha"} title={showPassword?"Ocultar senha":"Mostrar senha"}>{showPassword?<EyeOff size={18}/>:<Eye size={18}/>}</button>
+          </span>{mode==="register" && <small>A senha deve ter no mínimo 8 caracteres.</small>}
+        </label>}
+        {(mode==="register" || mode==="reset-password") && <label>Confirmar senha
+          <span className="password-field"><input type={showConfirm?"text":"password"} autoComplete="new-password" required minLength={8} maxLength={128} value={confirm} onChange={e=>setConfirm(e.target.value)}/>
+            <button type="button" className="password-visibility" onClick={()=>setShowConfirm(v=>!v)} aria-label={showConfirm?"Ocultar confirmação de senha":"Mostrar confirmação de senha"} title={showConfirm?"Ocultar senha":"Mostrar senha"}>{showConfirm?<EyeOff size={18}/>:<Eye size={18}/>}</button>
+          </span>
+        </label>}
         {error && <div role="alert" className="error-box">{error}</div>}
         {notice && <p role="status">{notice}</p>}
         <button className="button primary" disabled={busy} type="submit">{busy?"Processando…":titles[mode]}</button>
