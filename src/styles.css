@@ -33,6 +33,7 @@
 .cover-swatch,.custom-color{display:block;flex:0 0 24px;width:24px;height:24px;margin:0;padding:0;box-sizing:border-box;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #dedbe5;cursor:pointer;position:relative;overflow:hidden}
 .cover-swatch.active{box-shadow:0 0 0 2px #7965c9}
 .custom-color input{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;opacity:0;cursor:pointer}.custom-color:focus-within,.cover-swatch:focus-visible{outline:2px solid #7965c9;outline-offset:3px}
+.modal .cover-swatches .custom-color{margin:0}
 .cover-upload{position:relative;overflow:hidden}
 .cover-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
 .cover-error{color:#a3544f;font-size:9px;margin:6px 0}
