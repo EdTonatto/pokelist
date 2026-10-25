@@ -2,7 +2,7 @@
 
 Aplicação web para organizar coleções e listas de troca e venda de cartas Pokémon TCG.
 
-**Acesse:** [edtonatto.github.io/tcg-wishlist](https://edtonatto.github.io/tcg-wishlist/)
+**Acesse:** [edtonatto.github.io/pokelist](https://edtonatto.github.io/pokelist/)
 
 ## O que dá para fazer
 
@@ -15,6 +15,18 @@ Aplicação web para organizar coleções e listas de troca e venda de cartas Po
 - Compartilhar listas pelo WhatsApp ou exportar cartas como JPG e PDF em uma grade de até 3 × 3 por página.
 - Enviar sugestões ou relatar problemas pelo formulário do site. O GitHub abre uma issue preenchida para revisão e confirmação.
 - Exportar e importar um backup JSON.
+
+## Organização do código
+
+- `src/App.tsx`: inicialização do estado compartilhado e definição das rotas.
+- `src/pages/`: páginas e fluxos principais, separados por responsabilidade.
+- `src/components/`: componentes reutilizados entre páginas.
+- `src/lib/`: regras de domínio e validação de backups.
+- `src/theme/`: paletas e configuração de aparência.
+- `src/tcgdex.ts` e `src/db.ts`: acesso ao catálogo e ao armazenamento local.
+- `src/styles.css`: estilos globais e responsivos.
+
+O projeto usa Prettier para manter uma formatação consistente. Execute `npm run format` para formatar os arquivos ou `npm run format:check` para conferir a formatação.
 
 ## Como executar localmente
 
