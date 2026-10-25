@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
+import { Link, Navigate, NavLink, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import {
   Archive,
   CircleHelp,
@@ -27,6 +27,7 @@ import { usePokeListAuth } from "./lib/auth";
 function App() {
   const auth = usePokeListAuth(),
     route = useLocation(),
+    navigate = useNavigate(),
     [lists, setLists] = useState<Wishlist[]>([]),
     [ready, setReady] = useState(false),
     [theme, setTheme] = useState<"light" | "dark">(() =>
@@ -59,13 +60,24 @@ function App() {
     localStorage.setItem("pokelist-color-theme", pokemonTheme);
   }, [pokemonTheme]);
   useEffect(() => {
+    if (auth.loading || !auth.user) {
+      setLists([]);
+      setReady(false);
+      return;
+    }
+    let active = true;
     getLists()
-      .then((x) => {
-        setLists(x);
-        setReady(true);
+      .then((items) => {
+        if (active) setLists(items);
       })
-      .catch(() => setReady(true));
-  }, []);
+      .catch(() => {
+        if (active) setLists([]);
+      })
+      .finally(() => {
+        if (active) setReady(true);
+      });
+    return () => { active = false; };
+  }, [auth.loading, auth.user?.id]);
   async function persist(next: Wishlist[]) {
     setLists(next);
     await Promise.all(next.map(saveList));
@@ -74,8 +86,25 @@ function App() {
     await deleteList(id);
     setLists((v) => v.filter((x) => x.id !== id));
   }
+  async function handleLogout() {
+    try {
+      await auth.logout();
+    } catch {
+      // Local credentials are removed by logout even if the API is unreachable.
+    } finally {
+      setLists([]);
+      setReady(false);
+      navigate("/", { replace: true });
+    }
+  }
+  if (auth.loading) {
+    return <div className="loading">Verificando sessão…</div>;
+  }
   if (route.pathname.startsWith("/auth/")) {
     return <AuthPage auth={auth} />;
+  }
+  if (route.pathname !== "/" && !auth.user) {
+    return <Navigate to="/auth/login" replace />;
   }
   return route.pathname === "/" ? (
     <LandingPage
@@ -144,7 +173,7 @@ function App() {
               <i /> Armazenamento local
             </span>
             {auth.user ? (
-              <button type="button" className="theme-toggle" onClick={() => void auth.logout()}
+              <button type="button" className="theme-toggle" onClick={() => void handleLogout()}
                 title="Encerrar sessão da conta PokeList">
                 Sair · {auth.user.displayName}
               </button>
