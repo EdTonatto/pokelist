@@ -3658,3 +3658,83 @@ html[data-theme="dark"] .landing-cta p {
 .auth-form{display:grid;gap:14px;margin-top:22px}.auth-form label{display:grid;gap:6px;font-weight:600}
 .auth-form input{padding:12px;border:1px solid #aab5c7;border-radius:8px;font:inherit;background:transparent;color:inherit;width:100%}
 .auth-form .button{justify-content:center}.auth-links{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;margin-top:22px;font-size:14px}
+
+
+/* Auth surfaces use explicit semantic colors for each appearance mode.
+   The main app's --surface represents the page background, not a card. */
+.auth-shell {
+  background: #f7f6f2;
+  color: #292c34;
+}
+.auth-panel {
+  background: #ffffff;
+  border-color: #e2e3e8;
+  color: #292c34;
+}
+.auth-panel h1,
+.auth-form label,
+.auth-panel .brand {
+  color: #292c34;
+}
+.auth-panel > p {
+  color: #616675;
+  opacity: 1;
+}
+.auth-form input {
+  background: #ffffff;
+  color: #292c34;
+  border-color: #9ca3af;
+  color-scheme: light;
+}
+.auth-form input:focus-visible {
+  outline: 2px solid #7c67cf;
+  outline-offset: 2px;
+}
+.auth-links a {
+  color: #5845a9;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+html[data-theme="dark"] .auth-shell {
+  background: #16171d;
+  color: #f2f2f6;
+}
+html[data-theme="dark"] .auth-panel {
+  background: #24262f;
+  border-color: #484b59;
+  color: #f2f2f6;
+  box-shadow: 0 12px 44px #00000055;
+}
+html[data-theme="dark"] .auth-panel h1,
+html[data-theme="dark"] .auth-form label,
+html[data-theme="dark"] .auth-panel .brand {
+  color: #f2f2f6;
+}
+html[data-theme="dark"] .auth-panel > p {
+  color: #c5c7d1;
+  opacity: 1;
+}
+html[data-theme="dark"] .auth-form input {
+  background: #181a22;
+  color: #f8f8fc;
+  border-color: #8b8e9e;
+  color-scheme: dark;
+}
+html[data-theme="dark"] .auth-form input:focus-visible {
+  outline-color: #b8a6ff;
+}
+html[data-theme="dark"] .auth-links a {
+  color: #d2c4ff;
+}
+html[data-theme="dark"] .auth-form [role="status"] {
+  color: #b9efd0;
+  opacity: 1;
+}
+html[data-theme="dark"] .auth-form [role="alert"] {
+  color: #ffcacd;
+  background: #4a252b;
+  border: 1px solid #8d444d;
+}
+@media (max-width: 500px) {
+  .auth-panel { padding: 24px 20px; }
+}
