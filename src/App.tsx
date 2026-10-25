@@ -22,8 +22,11 @@ import { AppearancePage } from "./pages/AppearancePage";
 import { FeedbackPage } from "./pages/FeedbackPage";
 import { deleteList, getLists, replaceLists, saveList } from "./db";
 import type { Wishlist } from "./types";
+import { AuthPage } from "./pages/AuthPage";
+import { usePokeListAuth } from "./lib/auth";
 function App() {
-  const route = useLocation(),
+  const auth = usePokeListAuth(),
+    route = useLocation(),
     [lists, setLists] = useState<Wishlist[]>([]),
     [ready, setReady] = useState(false),
     [theme, setTheme] = useState<"light" | "dark">(() =>
@@ -71,6 +74,9 @@ function App() {
     await deleteList(id);
     setLists((v) => v.filter((x) => x.id !== id));
   }
+  if (route.pathname.startsWith("/auth/")) {
+    return <AuthPage auth={auth} />;
+  }
   return route.pathname === "/" ? (
     <LandingPage
       theme={theme}
@@ -110,12 +116,17 @@ function App() {
           <div className="backup-note">
             <ShieldCheck size={17} />
             <p>
-              Seus dados ficam neste dispositivo.
+              Suas listas continuam neste dispositivo.
               <br />
               <b>Faça backups regularmente.</b>
             </p>
           </div>
           <span className="version">POKÉLIST · MVP 1.0</span>
+          <div className="backup-note">
+            <p>{auth.user
+              ? "Conta conectada. As listas locais ainda não são sincronizadas com a nuvem."
+              : "Entre para usar uma conta PokeList; suas listas atuais permanecem locais."}</p>
+          </div>
         </div>
       </aside>
       <main className="main">
@@ -132,6 +143,14 @@ function App() {
             <span className="local-badge">
               <i /> Armazenamento local
             </span>
+            {auth.user ? (
+              <button type="button" className="theme-toggle" onClick={() => void auth.logout()}
+                title="Encerrar sessão da conta PokeList">
+                Sair · {auth.user.displayName}
+              </button>
+            ) : (
+              <Link className="theme-toggle" to="/auth/login">Entrar / Criar conta</Link>
+            )}
             <button
               type="button"
               className="theme-toggle"

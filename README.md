@@ -71,3 +71,10 @@ As buscas e os sets são fornecidos pelo [TCGdex](https://tcgdex.net/). A aplica
 ## Sugestões e problemas
 
 O formulário de sugestões prepara uma issue no repositório. Como o site é estático, a pessoa precisa estar conectada ao GitHub e confirmar a publicação da issue; o Pokélist não solicita nem armazena credenciais.
+
+
+## Integração com PokeList API
+
+O frontend utiliza `VITE_API_URL` (padrão `https://pokelist-api.onrender.com`) para login e consulta do catálogo. Acesse `#/auth/register`, `#/auth/login`, `#/auth/verify-email` e `#/auth/reset-password`. O token de acesso fica somente em memória; o refresh usa cookie HttpOnly com `credentials: include`, sujeito a limitações de cookies entre github.io e onrender.com. A API requer Resend configurado para enviar e-mails.
+
+**Migração de dados:** as listas IndexedDB existentes não são apagadas nem copiadas automaticamente. O backend ainda não possui suporte completo para `quantity`, `acquiredQuantity`, `salePrice`, fotos de capa e outras configurações locais. Esta PR habilita contas e cache de catálogo, mas a sincronização de listas depende da expansão do schema do backend. Nunca elimine seus backups locais.

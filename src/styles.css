@@ -3650,3 +3650,11 @@ html[data-theme="dark"] .landing-cta p {
     flex-basis: 100%;
   }
 }
+
+/* Account and authentication */
+.auth-shell{min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--bg,#f5f7fb)}
+.auth-panel{width:min(100%,460px);padding:32px;border:1px solid var(--border,#dbe2ed);border-radius:18px;background:var(--surface,#fff);box-shadow:0 12px 44px #00000010;color:var(--text,#111827)}
+.auth-panel h1{margin:28px 0 8px;font-size:28px}.auth-panel p{line-height:1.6;opacity:.8}
+.auth-form{display:grid;gap:14px;margin-top:22px}.auth-form label{display:grid;gap:6px;font-weight:600}
+.auth-form input{padding:12px;border:1px solid #aab5c7;border-radius:8px;font:inherit;background:transparent;color:inherit;width:100%}
+.auth-form .button{justify-content:center}.auth-links{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;margin-top:22px;font-size:14px}

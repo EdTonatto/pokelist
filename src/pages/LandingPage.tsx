@@ -51,8 +51,8 @@ export function LandingPage({
         >
           {theme === "light" ? <Moon size={17} /> : <Sun size={17} />}
         </button>
-        <Link to="/dashboard" className="landing-login">
-          Abrir meu app <ChevronRight size={15} />
+        <Link to="/auth/login" className="landing-login">
+          Entrar / Criar conta <ChevronRight size={15} />
         </Link>
       </header>
       <section className="landing-hero">
@@ -85,7 +85,7 @@ export function LandingPage({
           </div>
           <div className="landing-trust">
             <ShieldCheck size={16} />
-            <span>Sem conta. Seus dados ficam salvos no seu dispositivo.</span>
+            <span>Use sem conta ou crie uma conta. Suas listas atuais ficam neste dispositivo.</span>
           </div>
         </div>
         <div
