@@ -20,7 +20,7 @@ import { ListsPage } from "./pages/ListsPage";
 import { LandingPage } from "./pages/LandingPage";
 import { AppearancePage } from "./pages/AppearancePage";
 import { FeedbackPage } from "./pages/FeedbackPage";
-import { deleteList, getLists, getLegacyLists, replaceLists, saveList } from "./db";
+import { deleteList, getLists, getLegacyLists, saveList } from "./db";
 import type { Wishlist } from "./types";
 import { AuthPage } from "./pages/AuthPage";
 import { usePokeListAuth } from "./lib/auth";
@@ -265,8 +265,22 @@ function App() {
                   <DataPage
                     lists={lists}
                     onImport={async (x) => {
-                      await replaceLists(x);
-                      setLists(x);
+                      const existing = await getLists();
+                      const taken = new Set(existing.map(list => list.id));
+                      const imported = x.map(list => {
+                        const id = taken.has(list.id) ? crypto.randomUUID() : list.id;
+                        taken.add(id);
+                        return {
+                          ...list,
+                          id,
+                          items: list.items.map(item => ({
+                            ...item,
+                            wishlistId: id,
+                          })),
+                        };
+                      });
+                      for (const list of imported) await saveList(list);
+                      setLists(await getLists());
                     }}
                   />
                 }
