@@ -71,3 +71,9 @@
 .card-quantity>span{min-width:18px;text-align:center;font-size:10px;font-weight:700}
 .copy-count{color:#7061b4;font-weight:600}
 @media(max-width:760px){.search-result-row .search-result{padding-left:50px}.search-result-row>.image-expand-button{left:31px}.card-quantity{gap:2px;padding:0 4px}.card-quantity button{width:21px;height:21px}}
+.detail-actions{flex-wrap:wrap;align-items:center}
+.missing-export{display:grid;gap:4px}
+.missing-export-buttons{display:flex;gap:6px;flex-wrap:wrap}
+.missing-export-status,.missing-export-error{font-size:8px;color:#777985}
+.missing-export-error{color:#a3544f}
+@media(max-width:760px){.detail-actions{align-items:flex-start}.missing-export{width:100%}}
