@@ -85,18 +85,18 @@ export function DataPage({
     if (!preview) return;
     if (
       !confirm(
-        `Substituir todas as ${lists.length} listas atuais por ${preview.length} listas do arquivo? Esta ação não pode ser desfeita.`,
+        `Importar ${preview.length} listas para sua conta PokeList? Suas listas atuais serão preservadas.`,
       )
     )
       return;
     try {
       await onImport(preview);
-      setMessage(`${preview.length} listas importadas com sucesso.`);
+      setMessage(`${preview.length} listas importadas e vinculadas à sua conta com sucesso.`);
       setPreview(null);
       setFile(null);
     } catch {
       setMessage(
-        "Não foi possível gravar o backup. Seus dados atuais foram preservados.",
+        "Não foi possível concluir a importação. As listas já salvas na sua conta foram preservadas; algumas listas do arquivo podem ter sido importadas.",
       );
     }
   }
@@ -116,9 +116,8 @@ export function DataPage({
         <section>
           <h2>Sua coleção é só sua</h2>
           <p>
-            Suas listas ficam salvas localmente neste navegador, usando
-            armazenamento IndexedDB. Nada é enviado para um servidor. Para usar
-            em outro dispositivo, transfira um arquivo de backup JSON.
+            Suas listas são vinculadas à sua conta e ficam armazenadas no banco de dados.
+            Ao entrar em outro dispositivo, suas listas estarão disponíveis.
           </p>
         </section>
       </div>
@@ -152,7 +151,7 @@ export function DataPage({
           <h2>Importar backup</h2>
           <p>
             Carregue um JSON exportado anteriormente. Você verá uma prévia antes
-            de substituir seus dados.
+            de adicionar as listas à sua conta.
           </p>
           <label className="button secondary file-button">
             <ArrowUpFromLine size={16} /> Escolher arquivo
@@ -166,7 +165,7 @@ export function DataPage({
             />
           </label>
           <div className="backup-detail">
-            JSON até 10 MB · Substitui os dados atuais
+            JSON até 10 MB · Adiciona listas à sua conta
           </div>
         </div>
       </div>
@@ -208,8 +207,8 @@ export function DataPage({
               </span>
             ))}
             <p className="replace-warning">
-              <ShieldCheck size={15} /> A importação vai substituir{" "}
-              {lists.length} listas e {total} cartas deste navegador.
+              <ShieldCheck size={15} /> As listas do arquivo serão vinculadas à sua conta. As{" "}
+              {lists.length} listas e {total} cartas existentes serão preservadas.
             </p>
           </div>
           <div className="preview-actions">
@@ -223,7 +222,7 @@ export function DataPage({
               Cancelar
             </button>
             <button className="button primary" onClick={() => void importNow()}>
-              Substituir tudo
+              Importar para minha conta
             </button>
           </div>
         </div>
@@ -233,10 +232,9 @@ export function DataPage({
         <p>
           <b>Uma observação importante</b>
           <br />
-          Limpar os dados do navegador, usar janela anônima ou trocar de
-          dispositivo pode apagar ou deixar sua coleção inacessível. Faça
-          backups com frequência. A transferência por JSON cria cópias
-          independentes, sem sincronização automática.
+          Suas listas ficam armazenadas na sua conta PokeList e são recuperadas
+          no próximo login. Faça backups regularmente para manter uma cópia
+          independente dos seus dados.
         </p>
       </div>
     </>
