@@ -20,7 +20,7 @@ import { ListsPage } from "./pages/ListsPage";
 import { LandingPage } from "./pages/LandingPage";
 import { AppearancePage } from "./pages/AppearancePage";
 import { FeedbackPage } from "./pages/FeedbackPage";
-import { deleteList, getLists, replaceLists, saveList } from "./db";
+import { deleteList, getLists, getLegacyLists, replaceLists, saveList } from "./db";
 import type { Wishlist } from "./types";
 import { AuthPage } from "./pages/AuthPage";
 import { usePokeListAuth } from "./lib/auth";
@@ -30,6 +30,9 @@ function App() {
     navigate = useNavigate(),
     [lists, setLists] = useState<Wishlist[]>([]),
     [ready, setReady] = useState(false),
+    [syncError, setSyncError] = useState(""),
+    [legacyCount, setLegacyCount] = useState(0),
+    [importingLegacy, setImportingLegacy] = useState(false),
     [theme, setTheme] = useState<"light" | "dark">(() =>
       localStorage.getItem("pokelist-theme") === "dark" ? "dark" : "light",
     ),
@@ -66,12 +69,14 @@ function App() {
       return;
     }
     let active = true;
+    setSyncError("");
+    void getLegacyLists().then(old => { if (active) setLegacyCount(old.length); }).catch(() => {});
     getLists()
       .then((items) => {
         if (active) setLists(items);
       })
       .catch(() => {
-        if (active) setLists([]);
+        if (active) { setLists([]); setSyncError("Não foi possível carregar suas listas salvas. Tente atualizar a página."); }
       })
       .finally(() => {
         if (active) setReady(true);
@@ -79,12 +84,25 @@ function App() {
     return () => { active = false; };
   }, [auth.loading, auth.user?.id]);
   async function persist(next: Wishlist[]) {
-    setLists(next);
     await Promise.all(next.map(saveList));
+    setLists(next);
   }
   async function remove(id: string) {
     await deleteList(id);
     setLists((v) => v.filter((x) => x.id !== id));
+  }
+  async function importLegacy() {
+    setImportingLegacy(true);
+    try {
+      const old = await getLegacyLists();
+      for (const list of old) await saveList(list);
+      setLists(await getLists());
+      setLegacyCount(0);
+    } catch {
+      setSyncError("Falha ao importar listas antigas. Elas continuam preservadas neste navegador.");
+    } finally {
+      setImportingLegacy(false);
+    }
   }
   async function handleLogout() {
     try {
@@ -145,16 +163,16 @@ function App() {
           <div className="backup-note">
             <ShieldCheck size={17} />
             <p>
-              Suas listas continuam neste dispositivo.
+              Suas listas ficam salvas na sua conta.
               <br />
-              <b>Faça backups regularmente.</b>
+              <b>Disponíveis ao entrar em outro dispositivo.</b>
             </p>
           </div>
           <span className="version">POKÉLIST · MVP 1.0</span>
           <div className="backup-note">
             <p>{auth.user
-              ? "Conta conectada. As listas locais ainda não são sincronizadas com a nuvem."
-              : "Entre para usar uma conta PokeList; suas listas atuais permanecem locais."}</p>
+              ? "Conta conectada. Suas listas são armazenadas no banco de dados."
+              : "Entre para acessar suas listas armazenadas na nuvem."}</p>
           </div>
         </div>
       </aside>
@@ -170,7 +188,7 @@ function App() {
           </div>
           <div className="top-actions">
             <span className="local-badge">
-              <i /> Armazenamento local
+              <i /> Sincronizado com a conta
             </span>
             {auth.user ? (
               <button type="button" className="theme-toggle" onClick={() => void handleLogout()}
@@ -206,8 +224,18 @@ function App() {
           </div>
         </header>
         <section className="content">
+          {ready && legacyCount > 0 && !syncError && (
+            <div className="backup-note" role="status">
+              <p>Encontramos {legacyCount} lista(s) antiga(s) neste navegador. Elas ainda não estão na nuvem. Importe-as para esta conta quando quiser.</p>
+              <button type="button" className="button secondary" disabled={importingLegacy} onClick={() => void importLegacy()}>
+                {importingLegacy ? "Importando…" : "Importar minhas listas antigas"}
+              </button>
+            </div>
+          )}
           {!ready ? (
             <div className="loading">Preparando sua coleção…</div>
+          ) : syncError ? (
+            <div role="alert" className="loading">{syncError}</div>
           ) : (
             <Routes>
               <Route path="/dashboard" element={<Dashboard lists={lists} />} />
