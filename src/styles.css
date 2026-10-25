@@ -12,3 +12,11 @@
 .image-preview-modal>span{font-size:11px;color:#5f6069;text-align:center}
 .image-preview-close{position:absolute;right:18px;top:18px;z-index:1;width:32px;height:32px;border:0;border-radius:50%;background:#ffffffed;color:#3c3b44;display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 8px #0003}
 .image-preview-close:hover{background:#fff;color:#6652bb}
+/* Keep the expand action separate from the card selection button. */
+.search-result-row{position:relative}
+.search-result-row .search-result{padding-right:48px}
+.search-result-row>.image-expand-button{position:absolute;left:14px;top:50%;transform:translateY(-50%);z-index:2}
+.image-preview-backdrop{position:fixed!important;inset:0!important;z-index:2147483000!important;width:100vw;height:100dvh;overflow:auto;overscroll-behavior:contain}
+.image-preview-modal{box-sizing:border-box;max-width:min(92vw,430px);max-height:94dvh;overflow:hidden}
+.image-preview-modal img{max-width:min(84vw,400px);max-height:calc(88dvh - 46px)}
+@media(max-width:760px){.search-result-row .search-result{padding-left:50px}.search-result-row>.image-expand-button{left:12px}.image-preview-modal{max-width:94vw;max-height:92dvh}.image-preview-modal img{max-width:86vw;max-height:84dvh}}
