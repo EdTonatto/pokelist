@@ -64,6 +64,57 @@ html[data-theme="dark"] .feedback-field input,html[data-theme="dark"] .feedback-
 html[data-theme="dark"] .feedback-message{background:#293b31;border-color:#3b6548;color:#b7d8bd}
 html[data-theme="dark"] .feedback-message a{color:#a4d1af}
 @media(max-width:600px){.feedback-panel{padding:17px}.feedback-kind{grid-template-columns:1fr}.feedback-submit-row{align-items:stretch;flex-direction:column}.feedback-submit-row .button{width:100%}}
+:root{--pokemon-accent:#7965c9;--pokemon-accent-strong:#6652bb;--pokemon-accent-soft:#f1edfb;--pokemon-accent-line:#ded5f4;--pokemon-accent-text:#6652bb;--pokemon-accent-soft-dark:#332d47;--pokemon-accent-text-dark:#d9d0ff}
+.brand-mark,.selected-check{background:var(--pokemon-accent-strong)}
+.button.primary{background:var(--pokemon-accent-strong)}
+.button.primary:hover{background:var(--pokemon-accent)}
+.sidebar nav a.active{background:var(--pokemon-accent-soft);color:var(--pokemon-accent-text)}
+.welcome{background:var(--pokemon-accent-soft)}
+.welcome .eyebrow,.text-link,.landing-login,.landing-footer>a:last-child,.feature-detail,.appearance-mode-icon,.appearance-heading>.eyebrow{color:var(--pokemon-accent-strong)}
+.welcome h1 em,.landing-hero h1 em,.landing-section-heading h2 em{color:var(--pokemon-accent)}
+.progress-numbers strong,.progress-track i,.mini-progress .progress-track i,.preview-card-top b,.preview-progress b{color:var(--pokemon-accent-strong)}
+.progress-track i,.mini-progress .progress-track i,.preview-card-info .progress-track i{background:var(--pokemon-accent)}
+.status-pill.wanted{color:var(--pokemon-accent-text);background:var(--pokemon-accent-soft)}
+.cover-swatch.active,.cover-card-option.selected,.type-options button.selected,.cover-mode-tabs button.active{box-shadow:0 0 0 2px var(--pokemon-accent)}
+.cover-card-option.selected,.type-options button.selected,.cover-mode-tabs button.active{border-color:var(--pokemon-accent);color:var(--pokemon-accent-strong)}
+.theme-toggle,.landing-theme{color:var(--pokemon-accent-strong)}
+.landing-hero-copy>.eyebrow,.landing-section-heading>.eyebrow,.landing-cta .eyebrow{color:var(--pokemon-accent-strong)}
+.landing-glow{background:radial-gradient(circle,color-mix(in srgb,var(--pokemon-accent) 18%,white) 0,color-mix(in srgb,var(--pokemon-accent) 8%,white) 55%,#f8f6fc 75%)}
+.feature-card-highlight,.landing-cta{background:var(--pokemon-accent-soft);border-color:var(--pokemon-accent-line)}
+html[data-theme="dark"] .sidebar nav a.active{background:var(--pokemon-accent-soft-dark);color:var(--pokemon-accent-text-dark)}
+html[data-theme="dark"] .welcome,html[data-theme="dark"] .feature-card-highlight,html[data-theme="dark"] .landing-cta{background:var(--pokemon-accent-soft-dark);border-color:#464052}
+html[data-theme="dark"] .welcome .eyebrow,html[data-theme="dark"] .text-link,html[data-theme="dark"] .landing-login,html[data-theme="dark"] .landing-footer>a:last-child,html[data-theme="dark"] .feature-detail,html[data-theme="dark"] .appearance-mode-icon,html[data-theme="dark"] .appearance-heading>.eyebrow{color:var(--pokemon-accent-text-dark)}
+html[data-theme="dark"] .welcome h1 em,html[data-theme="dark"] .landing-hero h1 em,html[data-theme="dark"] .landing-section-heading h2 em{color:var(--pokemon-accent-text-dark)}
+html[data-theme="dark"] .landing-glow{background:radial-gradient(circle,color-mix(in srgb,var(--pokemon-accent) 24%,#17181d) 0,color-mix(in srgb,var(--pokemon-accent) 12%,#17181d) 55%,#1d1d24 75%)}
+html[data-theme="dark"] .status-pill.wanted{color:var(--pokemon-accent-text-dark);background:var(--pokemon-accent-soft-dark)}
+html[data-theme="dark"] .cover-card-option.selected,html[data-theme="dark"] .type-options button.selected,html[data-theme="dark"] .cover-mode-tabs button.active{border-color:var(--pokemon-accent);color:var(--pokemon-accent-text-dark)}
+.appearance-mode-card{max-width:850px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin:20px 0 35px;padding:16px 18px;border:1px solid #eeede9;border-radius:10px;background:#fff}
+.appearance-mode-card>div{display:flex;align-items:center;gap:11px}
+.appearance-mode-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:var(--pokemon-accent-soft)}
+.appearance-mode-card b,.appearance-mode-card small{display:block}
+.appearance-mode-card b{color:#343640;font-size:11px}
+.appearance-mode-card small{margin-top:3px;color:#858791;font-size:9px}
+.appearance-heading{max-width:850px;margin-bottom:14px}
+.appearance-heading h2{margin:5px 0;color:#343640;font:700 18px Manrope,sans-serif}
+.appearance-heading p{margin:0;color:#858791;font-size:10px}
+.pokemon-theme-grid{max-width:850px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pokemon-theme-card{min-height:74px;display:flex;align-items:center;gap:11px;padding:11px;border:1px solid #e9e7ee;border-radius:9px;background:#fff;text-align:left;cursor:pointer;transition:.15s}
+.pokemon-theme-card:hover{transform:translateY(-1px);border-color:var(--theme-accent)}
+.pokemon-theme-card.selected{border-color:var(--theme-accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--theme-accent) 20%,transparent)}
+.pokemon-theme-swatch{flex:none;width:35px;height:35px;display:flex;align-items:center;justify-content:center;gap:3px;border-radius:9px;background:var(--theme-soft)}
+.pokemon-theme-swatch i{width:7px;height:21px;border-radius:5px;background:var(--theme-accent)}
+.pokemon-theme-swatch i:nth-child(2){height:15px;opacity:.68}
+.pokemon-theme-swatch i:nth-child(3){height:10px;opacity:.42}
+.pokemon-theme-copy{min-width:0;display:grid;gap:4px;flex:1}
+.pokemon-theme-copy b{overflow:hidden;color:#343640;font-size:10px;text-overflow:ellipsis;white-space:nowrap}
+.pokemon-theme-copy small{overflow:hidden;color:#858791;font-size:8px;text-overflow:ellipsis;white-space:nowrap}
+.pokemon-theme-check{flex:none;color:var(--theme-accent)}
+html[data-theme="dark"] .appearance-mode-card,html[data-theme="dark"] .pokemon-theme-card{background:#22242b;border-color:#343640}
+html[data-theme="dark"] .appearance-mode-card b,html[data-theme="dark"] .appearance-heading h2,html[data-theme="dark"] .pokemon-theme-copy b{color:#f0eff5}
+html[data-theme="dark"] .appearance-mode-card small,html[data-theme="dark"] .appearance-heading p,html[data-theme="dark"] .pokemon-theme-copy small{color:#a5a6b1}
+html[data-theme="dark"] .pokemon-theme-card.selected{border-color:var(--theme-accent)}
+@media(max-width:760px){.pokemon-theme-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.pokemon-theme-grid{grid-template-columns:1fr}.appearance-mode-card{align-items:flex-start;flex-direction:column}.appearance-mode-card .button{width:100%}}
 .cover-upload{position:relative;overflow:hidden}
 .cover-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
 .cover-error{color:#a3544f;font-size:9px;margin:6px 0}
