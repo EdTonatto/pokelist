@@ -31,6 +31,8 @@ function App() {
     [lists, setLists] = useState<Wishlist[]>([]),
     [ready, setReady] = useState(false),
     [syncError, setSyncError] = useState(""),
+    [legacyCount, setLegacyCount] = useState(0),
+    [importingLegacy, setImportingLegacy] = useState(false),
     [theme, setTheme] = useState<"light" | "dark">(() =>
       localStorage.getItem("pokelist-theme") === "dark" ? "dark" : "light",
     ),
@@ -68,6 +70,7 @@ function App() {
     }
     let active = true;
     setSyncError("");
+    void getLegacyLists().then(old => { if (active) setLegacyCount(old.length); }).catch(() => {});
     getLists()
       .then((items) => {
         if (active) setLists(items);
@@ -87,6 +90,19 @@ function App() {
   async function remove(id: string) {
     await deleteList(id);
     setLists((v) => v.filter((x) => x.id !== id));
+  }
+  async function importLegacy() {
+    setImportingLegacy(true);
+    try {
+      const old = await getLegacyLists();
+      for (const list of old) await saveList(list);
+      setLists(await getLists());
+      setLegacyCount(0);
+    } catch {
+      setSyncError("Falha ao importar listas antigas. Elas continuam preservadas neste navegador.");
+    } finally {
+      setImportingLegacy(false);
+    }
   }
   async function handleLogout() {
     try {
@@ -208,6 +224,14 @@ function App() {
           </div>
         </header>
         <section className="content">
+          {ready && legacyCount > 0 && !syncError && (
+            <div className="backup-note" role="status">
+              <p>Encontramos {legacyCount} lista(s) antiga(s) neste navegador. Elas ainda não estão na nuvem. Importe-as para esta conta quando quiser.</p>
+              <button type="button" className="button secondary" disabled={importingLegacy} onClick={() => void importLegacy()}>
+                {importingLegacy ? "Importando…" : "Importar minhas listas antigas"}
+              </button>
+            </div>
+          )}
           {!ready ? (
             <div className="loading">Preparando sua coleção…</div>
           ) : syncError ? (
