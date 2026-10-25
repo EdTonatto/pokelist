@@ -88,3 +88,5 @@
 .card-quantity-line button:hover:not(:disabled){background:#f2effb}
 .card-quantity-line button:disabled{opacity:.4;cursor:default}
 .card-quantity-line b{min-width:15px;text-align:center;font-size:9px;color:#474953}
+
+.mark-card-acquired{display:inline-flex;align-items:center;justify-content:center;gap:4px;border:1px solid #d8eadc;border-radius:6px;background:#f2f8f3;color:#568a69;padding:5px 7px;font-size:8px;font-weight:700;cursor:pointer;white-space:nowrap}.mark-card-acquired:hover{background:#eaf5ed}
