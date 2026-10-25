@@ -29,10 +29,10 @@
 .cover-preview:has(span){text-shadow:0 1px 3px #fff,0 0 8px #fff}
 .cover-preview span{font-size:10px;font-weight:700;text-align:center;padding:0 8px}
 .cover-options{display:grid;align-content:center;justify-items:start;gap:8px}
-.cover-swatches{display:flex;flex-wrap:wrap;gap:7px}
-.cover-swatch,.custom-color{width:24px;height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #dedbe5;cursor:pointer;position:relative;overflow:hidden}
+.cover-swatches{display:flex;flex-wrap:wrap;align-items:center;gap:7px}
+.cover-swatch,.custom-color{display:block;flex:0 0 24px;width:24px;height:24px;margin:0;padding:0;box-sizing:border-box;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #dedbe5;cursor:pointer;position:relative;overflow:hidden}
 .cover-swatch.active{box-shadow:0 0 0 2px #7965c9}
-.custom-color input{position:absolute;inset:-5px;width:34px;height:34px;padding:0;border:0;cursor:pointer}
+.custom-color input{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;opacity:0;cursor:pointer}.custom-color:focus-within,.cover-swatch:focus-visible{outline:2px solid #7965c9;outline-offset:3px}
 .cover-upload{position:relative;overflow:hidden}
 .cover-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
 .cover-error{color:#a3544f;font-size:9px;margin:6px 0}
