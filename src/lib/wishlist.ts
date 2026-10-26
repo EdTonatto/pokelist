@@ -39,12 +39,12 @@ export function whatsappListText(list: Wishlist) {
         (item) =>
           `- ${item.cardName} (${item.localId}/${item.setOfficialTotal || "?"}) - ${availableQuantity(item)} un${item.salePrice !== undefined ? ` - ${formatCurrency(item.salePrice)}` : ""}`,
       );
-    return `*${list.name}*\nCartas disponíveis para troca/venda\n${lines.length ? lines.join("\n") : "Nenhuma carta disponível."}`;
+    return `*${list.name}*\nCartas disponíveis para troca/venda\n${lines.length ? lines.join("\n") : "Nenhuma carta disponível."}\n\nCrie sua lista em: https://pokelist.com.br/`;
   }
   const missing = list.items.filter((item) => missingQuantity(item) > 0);
   const lines = missing.map(
     (item) =>
       `- ${item.cardName} (${item.localId}/${item.setOfficialTotal || "?"})${missingQuantity(item) > 1 ? ` - ${missingQuantity(item)} un` : ""}`,
   );
-  return `*${list.name}*\nCartas faltantes pra coleção\n${lines.length ? lines.join("\n") : "Nenhuma carta faltante 🎉"}`;
+  return `*${list.name}*\nCartas faltantes pra coleção\n${lines.length ? lines.join("\n") : "Nenhuma carta faltante 🎉"}\n\nCrie sua lista em: https://pokelist.com.br/`;
 }
