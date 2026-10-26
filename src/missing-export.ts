@@ -221,7 +221,7 @@ async function drawPage(
   );
   ctx.font = "14px Arial, sans-serif";
   const prefix = "Crie sua lista em: ",
-    url = "edtonatto.github.io/tcg-wishlist",
+    url = "pokelist.com.br",
     footer = `${prefix}${url}`,
     footerWidth = ctx.measureText(footer).width,
     footerX = (PAGE_WIDTH - footerWidth) / 2,
@@ -328,7 +328,7 @@ function createPdf(canvases: HTMLCanvasElement[]) {
     const scaleX = 595.28 / canvas.width,
       scaleY = 841.89 / canvas.height,
       prefix = "Crie sua lista em: ",
-      url = "edtonatto.github.io/tcg-wishlist";
+      url = "pokelist.com.br";
     const probe = canvas.getContext("2d");
     if (!probe) throw new Error("Seu navegador não conseguiu preparar o PDF.");
     probe.font = "14px Arial, sans-serif";
@@ -356,7 +356,7 @@ function createPdf(canvases: HTMLCanvasElement[]) {
       "\nendstream",
     ]);
     object(annotationId, [
-      `<< /Type /Annot /Subtype /Link /Rect [${rectLeft.toFixed(2)} ${rectBottom.toFixed(2)} ${rectRight.toFixed(2)} ${rectTop.toFixed(2)}] /Border [0 0 0] /A << /S /URI /URI (https://edtonatto.github.io/tcg-wishlist/) >> >>`,
+      `<< /Type /Annot /Subtype /Link /Rect [${rectLeft.toFixed(2)} ${rectBottom.toFixed(2)} ${rectRight.toFixed(2)} ${rectTop.toFixed(2)}] /Border [0 0 0] /A << /S /URI /URI (https://pokelist.com.br/) >> >>`,
     ]);
   });
   const xrefOffset = length;
